@@ -15,3 +15,11 @@ storiesOf('Button', module)
   .add('with some emoji', () => (
     <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
   ));
+
+storiesOf('Login', module)
+  .add('with text', () => (
+    <div>
+    <input />
+    <Button onClick={action('clicked')}>Hello Button</Button>
+    </div>
+  ))
