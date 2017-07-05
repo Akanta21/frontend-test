@@ -1,20 +1,17 @@
 import React from 'react'
+
 import { Route } from 'react-router'
-import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter } from 'react-router-redux'
+import { Switch } from 'react-router-dom'
 
-import App from './App'
+import Main from '../routes/Main'
+import Next from '../routes/Next'
 
-const AppRouter = props => {
-    const { store } = props
-    console.log(store)
-    // Create a history of your choosing (we're using a browser history in this case)
-    const history = createHistory()
-
+const AppRouter = () => {
     return <div>
-        <ConnectedRouter history={history}>
-            <Route path='/' component={App} />
-        </ConnectedRouter>
+        <Switch>
+            <Route exact path='/' component={Main} />
+            <Route exact path='/next' component={Next} />
+        </Switch>
     </div>
 }
 

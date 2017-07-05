@@ -8,10 +8,40 @@ import {
 import createSagaMiddleware from 'redux-saga'
 import { each, flatten, merge } from 'lodash'
 
+import createHistory from 'history/createBrowserHistory'
+import { reducer as formReducer } from 'redux-form'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 
 import extractModelReducers from './extract-model-reducers'
 import extractModelEffects from './extract-model-effects'
+
+// Create a history of your choosing (we're using a browser history in this case)
+export const history = createHistory()
+
+export default function (models) {
+    // create saga middleware
+    const sagaMiddleware = createSagaMiddleware()
+
+    // reducers and effects
+    const reducer = combineModelReducers(models)
+    const effects = combineModelEffects(models)
+
+    // Build the middleware for intercepting and dispatching navigation actions
+    const middleware = [sagaMiddleware, routerMiddleware(history)]
+
+    // register saga
+    let store = createStore(reducer, applyMiddleware(...middleware))
+
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    store = createStore(reducer, composeEnhancers(
+        applyMiddleware(...middleware)
+    ))
+
+    sagaMiddleware.run(effects)
+
+    // return redux store
+    return store
+}
 
 // reducers with models
 const combineModelReducers = models => {
@@ -22,9 +52,10 @@ const combineModelReducers = models => {
     })
 
     const reducersWithReduxForm = merge(reducerMap, {
-        // form: formReducer,
-        routing: routerReducer,
+        form: formReducer,
+        router: routerReducer
     })
+
     return combineReducers(reducersWithReduxForm)
 }
 
@@ -38,26 +69,4 @@ const combineModelEffects = models => {
 
     const flattenedWatchers = flatten(watchers)
     return function* () { yield flattenedWatchers }
-}
-
-export default function (models) {
-    // create saga middleware
-    const sagaMiddleware = createSagaMiddleware()
-
-    // reducers and effects
-    const reducer = combineModelReducers(models)
-    const effects = combineModelEffects(models)
-
-    // register saga
-    let store = createStore(reducer, applyMiddleware(sagaMiddleware))
-
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-    store = createStore(reducer, composeEnhancers(
-        applyMiddleware(sagaMiddleware, routerMiddleware)
-    ))
-
-    sagaMiddleware.run(effects)
-
-    // return redux store
-    return store
 }

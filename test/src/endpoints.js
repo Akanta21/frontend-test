@@ -1,1 +1,1 @@
-export const EP_LOGIN = 'ENDPOINT'
+export const EP_LOGIN = 'https://api.tenoften.co/auth'

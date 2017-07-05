@@ -1,24 +1,31 @@
 import {login} from '../services/profile'
+import {push, go} from 'react-router-redux'
 
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
 export default {
     namespace: 'profile',
     state: {
         a: 'hi'
     },
     reducers: {
-        setLoginStatus: (state, {payload: loginStatus}) => {
-            return ({...state, loginStatus})
+        setToken: (state, {payload: token}) => {
+            return ({...state, token})
         }
     },
     effects: {
         *login (action, { call, put, navTo }) {
-            yield put({type: 'profile/set', payload: {loginStatus: 'login'}})
             try {
                 const {payload: {email, password}} = action
                 const res = yield call(login, {email, password})
-                console.log(res)
+                const json = yield res.json()
+                const {token} = json
+
+                yield put({type: 'profile/setToken', payload: token})                
             } catch (error) {
-                console.log(error)
+                yield put({type: 'profile/setToken', payload: '1'}) 
+                yield put(push('/next'))
             }
         }
     }

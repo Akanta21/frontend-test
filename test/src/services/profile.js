@@ -4,11 +4,12 @@ import {
 } from '../endpoints'
 
 export function login ({email, password}) {
+    console.log(JSON.stringify({email, password}))
     return fetch(EP_LOGIN, {
         method: 'POST',
         headers: {
-            'CONTENT_TYPE': 'application/json'
+            'CONTENT-TYPE': 'application/json'
         },
-        body: JSON.stringify({username: email, password})
+        body: JSON.stringify({email, password})
     })
 }
