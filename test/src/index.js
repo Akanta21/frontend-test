@@ -9,12 +9,21 @@ import registerServiceWorker from './utils/registerServiceWorker'
 
 import initModels, { history } from './utils/initModels'
 import profileModel from './models/profile'
+import questionModel from './models/question'
 
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const store = initModels([
-    profileModel
+    profileModel,
+    questionModel
 ])
+
+const token = sessionStorage.getItem('token')
+
+if (token) {
+    store.dispatch({type: 'qBank/fetchQuestions', payload: token})
+}
+
 
 const renderApp = App => render(<Provider store={store}>
     <ConnectedRouter history={history}>

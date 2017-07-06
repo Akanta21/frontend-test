@@ -1,6 +1,8 @@
 import {login} from '../services/profile'
 import {push} from 'react-router-redux'
 
+const session = require('store')
+
 export default {
     namespace: 'profile',
     state: {},
@@ -22,8 +24,10 @@ export default {
                 const json = yield res.json()
                 if (status === 200) {
                     const {token} = json
-                    yield put({type: 'profile/setToken', payload: token})   
-                    yield put(push('/next'))   
+                    session.set('token', token)
+                    yield put({type: 'profile/setToken', payload: token})
+                    yield put({type: 'question/fetchQuestions', payload: token})   
+                    yield put(push('/dashboard'))   
                 } else {
                     yield put({type: 'profile/setError', payload: 'Invalid Login Credentials'})
                 }          

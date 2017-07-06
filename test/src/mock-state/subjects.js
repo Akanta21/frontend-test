@@ -1,4 +1,4 @@
-export const Subjects = {
+const subjects = {
     data: {
         level: [
             "pri1",
@@ -707,3 +707,5 @@ export const Subjects = {
     }
 
 }
+
+export default subjects

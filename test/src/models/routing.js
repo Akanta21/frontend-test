@@ -5,7 +5,6 @@ export default {
     },
     reducers: {
         set: (state, {payload: path}) => {
-            console.log(path)
             return ({...state, location:{pathname: path} })
         }
     }

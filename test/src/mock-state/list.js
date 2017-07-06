@@ -1,5 +1,5 @@
 // list of data
-export const list = {
+const list = {
     data: [{
         _id: "heAVoOkTQEuADQSCTcf5rA",
         updated: "2017-07-03T08:36:51.152Z",
@@ -31,3 +31,5 @@ export const list = {
 
     }]
 }
+
+export default list

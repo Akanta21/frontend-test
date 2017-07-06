@@ -1,8 +1,9 @@
-import { get, camelCase } from 'lodash'
+import { get } from 'lodash'
 
 import list from './list'
+import subjects from './subjects'
 
-const stateSet = {list}
+const stateSet = {list, subjects}
 
 const globalSetting = 'redux'
 
@@ -20,6 +21,6 @@ const state = mockState(state)
 const state = mockState(state, 'list')
 */
 
-export default (state, set = globalSetting) => get(stateSets, set, state)
+export default (state, set = globalSetting) => get(stateSet, set, state)
 
 
