@@ -6,7 +6,8 @@ import Pure from './Pure'
 
 const s = state => {
     return {
-        token: get(state, 'profile.token')
+        token: get(state, 'profile.token'),
+        error: get(state, 'profile.error')
     }
 }
 

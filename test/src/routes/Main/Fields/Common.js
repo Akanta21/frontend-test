@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
     padding-bottom: 1px;
     > label > span {
-        padding-left: 8px;
-        font-size: 12px;
-        font-weight: 200;
+        padding-left: 2px;
+        font-size: 16px;
+        font-weight: 400;
     }
 `
 
@@ -23,14 +23,15 @@ export const Input = styled.input`
     padding: 0 16px;
     width: 100%;
     background-color: white;
-    border-radius: 2px;
+    border-radius: 4px;
 
     &:focus {
-        border-color: #00465A;
+        border-color: #2f6b2a;
     }
 `
 
 export const ErrorContainer = styled.div`
-    padding-top: 6px;
+    font-size: 12px;
+    padding: 2px 0 8px 0;
     color: red;
 `

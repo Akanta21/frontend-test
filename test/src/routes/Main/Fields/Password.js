@@ -16,6 +16,7 @@ const renderPassword = props => {
             <Input
             {...input}
             type='text'
+            placeholder='Password'
             error={touched && error}
             autoComplete='off' />
         </InputHolder>

@@ -16,6 +16,7 @@ const renderEmail = props => {
             <Input
                 {...input}
                 type='email'
+                placeholder='Username'
                 error={touched && error}
                 autoComplete='off' />
         </InputHolder>

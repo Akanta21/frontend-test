@@ -19,11 +19,15 @@ const Wrapper = styled.div`
     }
 `
 
-const Button = styled.button``
+const Button = styled.button`
+    background-color: #29ce7e;
+    border-radius: 4px;
+    color: white;
+`
 
 export default ({
     children,
     onClick: handleClick
 }) => <Wrapper>
-    <Button onClick={handleClick}>{children}</Button>
+    <Button className='btn block full-width' onClick={handleClick}>{children}</Button>
 </Wrapper>
