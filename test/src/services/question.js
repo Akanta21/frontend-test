@@ -1,6 +1,7 @@
 /* global fetch */
 import {
-    EP_QUESTIONS
+    EP_QUESTIONS,
+    EP_POST_QUESTION
 } from '../endpoints'
 
 export function fetchQ (token) {
@@ -10,5 +11,16 @@ export function fetchQ (token) {
             'CONTENT-TYPE': 'application/json',
             'Authorization': `Bearer ${token}`
         }
+    })
+}
+
+export function postQ ({token, questionObject}) {
+    return fetch(EP_POST_QUESTION, {
+        method: 'POST',
+        headers: {
+            'CONTENT-TYPE': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(questionObject)
     })
 }

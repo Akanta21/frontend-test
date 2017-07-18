@@ -19,18 +19,26 @@ const RightCol = styled.div`
     text-align: right;
 `
 
+const HiddenCol = styled.div`
+    display: flex;
+`
+
 const Item = styled.div`
     padding: 0 10px;
 `
 
 export default (props) => {
-    const {redirect} = props
+    const {redirect, logout, token} = props
     return <Wrapper>
         <LeftCol>TenofTen Logo</LeftCol>
         <RightCol>
-            <Item onClick={()=> redirect('/') }>Login</Item>
-            <Item onClick={()=> redirect('/dashboard') }>Listing</Item>
-            <Item onClick={() => redirect('/createquestion')}>Submit a Question</Item>
+            {!token && <Item onClick={()=> redirect('/') }>Login</Item>}
+            {token && 
+            <HiddenCol>
+                <Item onClick={()=> redirect('/dashboard') }>Listing</Item>
+                <Item onClick={() => redirect('/createquestion')}>Submit a Question</Item>
+                <Item onClick={logout}>Logout</Item>
+            </HiddenCol>}
         </RightCol>
     </Wrapper>
 }

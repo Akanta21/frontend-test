@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `
 
 const FormWrapper = styled.div`
-    width: 30%;
+    width: 40%;
 `
 
 export default props => {

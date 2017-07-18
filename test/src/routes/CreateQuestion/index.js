@@ -1,26 +1,21 @@
 import { connect } from 'react-redux'
-// import { push } from 'react-router-redux'
-import { get, find } from 'lodash'
+import { get } from 'lodash'
+import { push } from 'react-router-redux'
 
 import Pure from './Pure'
-import searchParams from '../../utils/searchParams'
-// mocking
-import mockState from '../../mock-state'
 
 const s = state => {
-    const thisState = mockState(state)
-
-    const listOfQuestions = get(thisState, 'qBank.listOfQuestions', [])
-    const route = get(thisState, 'router.location.search', '')
-    const _id = searchParams(route, 'referenceId')
-
     return {
-        question: find(listOfQuestions, {_id})
+        token: get(state, 'profile.token'),
+        error: get(state, 'profile.error')
     }
 }
 
-const d = dispatch => ({
+const d = dispatch => {
+    const token = sessionStorage.getItem('token')
+    return {
+        onSubmit: (question, answer) => dispatch({type: 'qBank/postQuestion', payload: {token, question, answer}})
+    }
+}
 
-})
-
-export default connect(s, d) (Pure)
+export default connect(s, d)(Pure)

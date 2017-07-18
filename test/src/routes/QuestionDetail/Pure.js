@@ -44,7 +44,6 @@ const Body = styled.div`
 
 export default props => {
     const { question } = props
-    console.log(question)
     const level = get(question, 'level')
     const q = get(question, 'question', [])
     const marks = get(question, 'mark')

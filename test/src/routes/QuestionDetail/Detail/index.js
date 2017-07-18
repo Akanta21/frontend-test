@@ -6,22 +6,36 @@ const Wrapper = styled.div`
     background-color: #ffffff;
     padding: 15px 15px 7px;
     min-height: 48px;
-    border-color: #e7eaec;
 `
 
-const Header = styled.div`
+const Question = styled.div`
     display: flex;
     align-items: center;
     font-size: 16px;
     font-weight: 400;
     color: #676a6c;
+
+    >span {
+        color: #2d4aef;
+    }
 `
 
-// const QuestionDetail =
+const Answer = styled.div`
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #676a6c;
+    > span {
+        color: #d62f2f;
+    }
+`
 
 export default props => {
     const question = get(props, 'question_body', '')
+    const answer = get(props, 'answer', '')
     return <Wrapper>
-        <Header>Question: {question}</Header>
+        <Question><span>Question:&nbsp;</span> {question}</Question>
+        <Answer><span>Answer:&nbsp;</span>{answer}</Answer>
     </Wrapper>
 }
