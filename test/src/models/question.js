@@ -10,6 +10,7 @@ export default {
     },
     effects: {
         *fetchQuestions (action, { call, put, navTo }) {
+            console.log('fetching')
             try {
                 const {payload: token} = action
                 const res = yield call(fetchQ, token)

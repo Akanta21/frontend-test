@@ -18,7 +18,7 @@ const store = initModels([
     questionModel
 ])
 
-const token = sessionStorage.getItem('token')
+const token = localStorage.getItem('token')
 
 if (token) {
     store.dispatch({type: 'qBank/fetchQuestions', payload: token})

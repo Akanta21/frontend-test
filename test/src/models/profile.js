@@ -26,7 +26,7 @@ export default {
                     const {token} = json
                     session.set('token', token)
                     yield put({type: 'profile/setToken', payload: token})
-                    yield put({type: 'question/fetchQuestions', payload: token})   
+                    yield put({type: 'qBank/fetchQuestions', payload: token})   
                     yield put(push('/dashboard'))   
                 } else {
                     yield put({type: 'profile/setError', payload: 'Invalid Login Credentials'})
